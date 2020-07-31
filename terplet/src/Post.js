@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useState } from 'react'
 import './Post.css'
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -45,10 +45,14 @@ const useStyles = makeStyles((theme) => ({
 
 function Post({beds, baths, start, end, price, location, imageURL, caption}) {
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
       };
+      
+      {console.log(imageURL)}
+
     return (
     <Card className={classes.root} raised = {true}>
         <CardActionArea>

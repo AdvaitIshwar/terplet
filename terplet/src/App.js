@@ -194,6 +194,7 @@ function App() {
       </div>
       )}
       <Grid container spacing={4} className={classes.gridContainer}>
+
         {posts.map(({ id, post }) => (
           <Grid item>
           <Post
@@ -209,6 +210,7 @@ function App() {
           />
           </Grid>
         ))}
+        
       </Grid>
     </div>
   );

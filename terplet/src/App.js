@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
 import TextField from '@material-ui/core/TextField';
+import ImageUpload from './ImageUpload';
 
 function getModalStyle() {
   const top = 50;
@@ -92,6 +93,8 @@ function App() {
 
   return (
     <div className="App">
+      {user?.displayName ? (<ImageUpload username={user.displayName}/>) : <h3>Please Login</h3>}
+
       <Modal open={open} onClose={() => setOpen(false)}>
         <Fade in={open}>
           <div style={modalStyle} className={classes.paper}>
@@ -196,6 +199,7 @@ function App() {
           price={post.price}
           location={post.location}
           imageURL={post.imageURL}
+          caption={post.caption}
         />
       ))}
     </div>

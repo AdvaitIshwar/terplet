@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
 import TextField from '@material-ui/core/TextField';
+import {Grid} from "@material-ui/core"
 
 function getModalStyle() {
   const top = 50;
@@ -28,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  gridContainer: {
+    paddingLeft: "100px",
+    paddingRight: "100px"
+  }
 }));
 
 function App() {
@@ -185,19 +190,22 @@ function App() {
       <Button onClick={() => setOpen(true)}>Sign Up</Button>
       </div>
       )}
-
-      {posts.map(({ id, post }) => (
-        <Post
-          key={id}
-          beds={post.beds}
-          baths={post.baths}
-          start={post.start}
-          end={post.end}
-          price={post.price}
-          location={post.location}
-          imageURL={post.imageURL}
-        />
-      ))}
+      <Grid container spacing={4} className={classes.gridContainer}>
+        {posts.map(({ id, post }) => (
+          <Grid item>
+          <Post
+            key={id}
+            beds={post.beds}
+            baths={post.baths}
+            start={post.start}
+            end={post.end}
+            price={post.price}
+            location={post.location}
+            imageURL={post.imageURL}
+          />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 }

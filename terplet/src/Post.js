@@ -43,25 +43,24 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function Post({beds, baths, start, end, price, location, imageURL, caption}) {
+function Post({username, beds, baths, start, end, price, location, imageURL, caption}) {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
       };
-      
-      {console.log(imageURL)}
+
+      {console.log(username)}
+
 
     return (
     <Card className={classes.root} raised = {true}>
         <CardActionArea>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            AI
-          </Avatar>
-        }
+          <Avatar aria-label="recipe" alt={username} src="/broken-image.jpg"  className={classes.avatar} /> 
+                    }
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />

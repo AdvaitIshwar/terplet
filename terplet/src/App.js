@@ -199,6 +199,7 @@ function App() {
           <Grid item>
           <Post
             key={id}
+            username={post.username}
             beds={post.beds}
             baths={post.baths}
             start={post.start}
@@ -210,7 +211,7 @@ function App() {
           />
           </Grid>
         ))}
-        
+
       </Grid>
     </div>
   );

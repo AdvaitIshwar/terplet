@@ -9,9 +9,9 @@ import {StateProvider} from "./StateProvider";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <StateProvider initialState = {initialState} reducer = {reducer}> */}
+    <StateProvider initialState = {initialState} reducer = {reducer}>
     <App />
-    {/* </StateProvider> */}
+    </StateProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

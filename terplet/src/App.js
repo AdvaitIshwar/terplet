@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Post from "./Post";
 import PostPage from "./PostPage";
-
+import Favorites from "./Favorites";
 import { db, auth } from "./firebase";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,6 +13,8 @@ import NewListing from "./NewListing";
 import { Grid } from "@material-ui/core";
 import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import NavBar from './NavBar'
+import {useStateValue} from "./StateProvider"
+
 
 function getModalStyle() {
   const top = 50;
@@ -41,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+  const [{favorites}] = useStateValue();
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [posts, setPosts] = useState([]);
@@ -50,6 +53,7 @@ function App() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [user, setUser] = useState(null);
+  console.log(favorites)
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -102,9 +106,10 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar user={user} auth={auth} setOpenSignIn={setOpenSignIn} setOpen={setOpen}/>
+      {/* <NavBar user={user} auth={auth} setOpenSignIn={setOpenSignIn} setOpen={setOpen}/> */}
 
       <Router>
+      <NavBar user={user} auth={auth} setOpenSignIn={setOpenSignIn} setOpen={setOpen}/>
         <Switch>
 
           <Route exact path="/newlisting">
@@ -117,6 +122,10 @@ function App() {
 
           <Route path ="/postpage/:id">
               <PostPage />
+          </Route>
+
+          <Route path ="/favorites">
+              <Favorites />
           </Route>
 
           <Route exact path="/">

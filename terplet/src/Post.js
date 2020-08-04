@@ -3,7 +3,6 @@ import "./Post.css";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
@@ -12,14 +11,14 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import BookMarkIcon from "@material-ui/icons/Bookmark";
 import Badge from '@material-ui/core/Badge'
 import {Link} from '@material-ui/core/'
+import {useStateValue} from "./StateProvider";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,14 +60,32 @@ function Post({
 }) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
+  const [{favorites}, dispatch] = useStateValue();
+
+  const addToFavorites = () => {
+    dispatch({
+      type: "ADD_TO_FAVORITES",
+      item: {
+        title: title,
+        username: username,
+        beds: beds,
+        baths: baths,
+        start: start,
+        end: end,
+        price: price,
+        location:  location,
+        imageURL: imageURL,
+        univAffiliated: univAffiliated,
+        description: description,
+        id: id,
+      },
+    })
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  {
-    console.log(id.toString())
-}
 
   return (
     <Badge 
@@ -111,7 +128,7 @@ function Post({
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={addToFavorites}>
           <BookMarkIcon />
         </IconButton>
         <IconButton

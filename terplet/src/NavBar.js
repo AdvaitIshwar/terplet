@@ -15,11 +15,11 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import EmailIcon from '@material-ui/icons/Email';
 import BookMarkIcon from '@material-ui/icons/Bookmark';
 import {useStateValue} from "./StateProvider";
-import Modal from '@material-ui/core'
+import { Link } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function NavBar({user, auth, setOpenSignIn, setOpen}) {
+  const [{favorites}] = useStateValue();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -142,11 +143,13 @@ function NavBar({user, auth, setOpenSignIn, setOpen}) {
               </Badge>
             </IconButton>
 
-            <IconButton aria-label="messages" color="inherit">
-              <Badge color="secondary" badgeContent = {4}>
+            <Link to="/favorites">
+            <IconButton aria-label="messages" color="inherit" >
+              <Badge color="secondary" badgeContent = {favorites?.length}>
                 <BookMarkIcon />
               </Badge>
             </IconButton>
+            </Link>
             <IconButton
               edge="end"
               aria-label="account of current user"

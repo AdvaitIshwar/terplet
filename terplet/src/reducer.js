@@ -1,14 +1,18 @@
 export const initialState = {
-    favorites: []
+    favorites: [],
+    user: null,
 };
 
 function reducer(state, action){
     switch(action.type){
         case "ADD_TO_FAVORITES":
-            //logic
+            return {
+                ...state,
+                favorites: [...state.favorites, action.item]
+            };
             break;
         case "REMOVE_FROM_FAVORITES":
-            //logic
+            return {state}
             break;
         default:
             break;
